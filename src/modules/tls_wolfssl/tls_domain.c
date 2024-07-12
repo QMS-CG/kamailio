@@ -615,7 +615,6 @@ static int load_crl(tls_domain_t *d)
  * @param d domain
  * @return 0 on success, -1 on error
  */
-static int set_cipher_list(tls_domain_t *) __attribute__((unused));
 static int set_cipher_list(tls_domain_t *d)
 {
 	char *cipher_list;
@@ -973,7 +972,8 @@ static int ksr_tls_fix_domain(tls_domain_t *d, tls_domain_t *def)
 		return -1;
 	if(load_crl(d) < 0)
 		return -1;
-	// if (set_cipher_list(d) < 0) return -1;
+	if (set_cipher_list(d) < 0) 
+		return -1;
 	if(set_verification(d) < 0)
 		return -1;
 	if(set_ssl_options(d) < 0)
